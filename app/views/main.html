@@ -1,0 +1,65 @@
+
+<div>
+      <div class="connection"></div>
+    <div class="connection2"></div>
+    </div>
+<div class="workflow">
+
+    <ul>
+        <li ng-repeat="step in workflow.steps">
+            <div>
+                <div class="workflow-item">
+                    <div class="step" ng-click="step.show = !step.show">{{step.name}}
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </div>
+                    <div class="features">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                        <span class="add glyphicon glyphicon-plus-sign"></span>
+                    </div>
+                </div>
+                <ul class="actions" ng-class="{show: step.show}">
+                    <li ng-repeat="action in step.actions">
+                        <div>
+                            <div class="workflow-item">
+                                <div class="sub-item" ng-click="action.show = !action.show">{{action.name}}
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </div>
+                                <div class="features">
+                                    <span class="glyphicon glyphicon-th-list">
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="actions-items" ng-class="{show: action.show}">
+                            <li ng-repeat="actionItem in action.actionItems">
+                                <div>
+                                    <div class="workflow-item">
+                                        <div class="sub-item" ng-click="actionItem.show = !actionItem.show">{{actionItem.name}}
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </div>
+                                        <div class="features">
+                                            <span class="glyphicon glyphicon-th-list"></span>
+                                            <span class="add glyphicon glyphicon-plus-sign"></span>
+                                        </div>
+                                    </div>
+                                    <ul class="items" ng-class="{show: actionItem.show}">
+                                        <li ng-repeat="item in actionItem.items">
+                                            <div>
+                                                <div class="workflow-item">
+                                                    <div class="leaf">{{item.name}}
+                                                    </div>
+                                                    <div class="features">
+                                                        <span class="glyphicon glyphicon-th-list"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
