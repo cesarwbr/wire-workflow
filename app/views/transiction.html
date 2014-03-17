@@ -1,0 +1,3 @@
+<div ng-class="transiction.type" step-from="{{transiction.stepFrom}}" step-to="{{transiction.stepTo}}" transiction="{{transiction.id}}" ng-repeat="transiction in workflow.transictions">
+  <div ng-class="{'arrow-left': transiction.type == 'connection-right', 'arrow-right': transiction.type == 'connection-left'}"></div>
+</div>
