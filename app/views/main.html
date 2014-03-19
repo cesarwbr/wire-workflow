@@ -1,69 +1,27 @@
-<div>
-  <div class="connection-left">
+<div class="workflow-menu">
+  <h3>Workflow: {{workflow.name}}
+    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showWorkflow()"></a>
+    <a class="add glyphicon glyphicon-plus-sign" alt="Adicionar Step" title="Adicionar Step" ng-click="addStep()"></a>
+  </h3>
+  <div>
+    <div class="workflow">
+
+      <ul>
+        <li ng-repeat="step in workflow.steps">
+          <div workflow-step="step" current-action="currentAction" workflow="workflow"></div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <!-- <div class="connection-left">
     <div class="arrow-right"></div>
-  </div>
-  <!-- <div ng-class="transiction.type" step-from="step1" step-to="step2" transiction="{{transiction.id}}" ng-repeat="transiction in workflow.transictions">
+  </div> -->
+      <!-- <div ng-class="transiction.type" step-from="step1" step-to="step2" transiction="{{transiction.id}}" ng-repeat="transiction in workflow.transictions">
     <div ng-class="{'arrow-left': transiction.type == 'connection-right', 'arrow-right': transiction.type == 'connection-left'}"></div>
   </div> -->
-  <div workflow-transiction></div>
+      <div workflow-transiction></div>
+    </div>
+  </div>
 </div>
-<div class="workflow">
-
-  <ul>
-    <li ng-repeat="step in workflow.steps">
-      <div>
-        <div class="workflow-item" step-id="{{step.id}}">
-          <div class="step" ng-click="step.show = !step.show">{{step.name}}
-            <span class="glyphicon glyphicon-chevron-down"></span>
-          </div>
-          <div class="features">
-            <span class="glyphicon glyphicon-th-list"></span>
-            <span class="add glyphicon glyphicon-plus-sign"></span>
-          </div>
-        </div>
-        <ul class="actions" ng-class="{show: step.show}">
-          <li ng-repeat="action in step.actions">
-            <div>
-              <div class="workflow-item">
-                <div class="sub-item" ng-click="action.show = !action.show">{{action.name}}
-                  <span class="glyphicon glyphicon-chevron-down"></span>
-                </div>
-                <div class="features">
-                  <span class="glyphicon glyphicon-th-list">
-                </div>
-              </div>
-            </div>
-            <ul class="actions-items" ng-class="{show: action.show}">
-              <li ng-repeat="actionItem in action.actionItems">
-                <div>
-                  <div class="workflow-item">
-                    <div class="sub-item" ng-click="actionItem.show = !actionItem.show">{{actionItem.name}}
-                      <span class="glyphicon glyphicon-chevron-down"></span>
-                    </div>
-                    <div class="features">
-                      <span class="glyphicon glyphicon-th-list"></span>
-                      <span class="add glyphicon glyphicon-plus-sign"></span>
-                    </div>
-                  </div>
-                  <ul class="items" ng-class="{show: actionItem.show}">
-                    <li ng-repeat="item in actionItem.items">
-                      <div>
-                        <div class="workflow-item">
-                          <div class="leaf">{{item.name}}
-                          </div>
-                          <div class="features">
-                            <span class="glyphicon glyphicon-th-list"></span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </li>
-  </ul>
+<div class="workflow-details" ng-include="workflow.template.url">
 </div>
