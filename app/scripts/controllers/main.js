@@ -39,33 +39,6 @@ angular.module('wireWorkflowApp')
       'Karma'
     ];
 
-    var actionItems = [{
-      name: 'Pre-Functions',
-      type: 'pre-function',
-      items: []
-    }, {
-      name: 'Post-Functions',
-      type: 'post-function',
-      items: []
-    }, {
-      name: 'Validators',
-      type: 'validator',
-      items: []
-    }, {
-      name: 'Conditions',
-      type: 'codition',
-      items: []
-    }, {
-      name: 'Result',
-      type: 'result',
-      items: []
-    }, {
-      name: 'Codition Results',
-      type: 'condition-result',
-      items: []
-    }];
-
-
     $scope.addStep = function() {
       $scope.workflow.currentStep = {
         id: 1,
@@ -89,6 +62,13 @@ angular.module('wireWorkflowApp')
       currentItem: {},
       template: {
         url: 'views/workflow-details.html'
+      },
+      restriction: {
+        type: 'and',
+        conditions: [{
+          type: 'expression',
+          conditions: []
+        }]
       },
       transictions: [
         /*{
@@ -161,6 +141,42 @@ angular.module('wireWorkflowApp')
       }
     };
   })
+  .directive('workflowRestriction', function($compile) {
+    return {
+      restriction: 'A',
+      scope: {
+        restriction: '=restriction'
+      },
+      link: function(scope, element) {
+        var template;
+        if (scope.restriction.type === '') {
+          template = '<a ng-click="addExpression(restriction)">Expression</a> <a>And</a> <a>Or</a>';
+        } else if (scope.restriction.type === 'expression') {
+          template = '<label>Codition</label><select><option>Codition 1</option><option>Codition 2</option><option>Codition 3</option></select><div>Link to modal</div>';
+        } else {
+          template = '<div ng-repeat="condition in restriction.conditions"><div>{{restriction.type}}</div><div workflow-restriction restriction="condition"></div></div>';
+        }
+        element.append(template);
+        $compile(element.contents())(scope.$new());
+
+        scope.addExpression = function(restriction) {
+          restriction.type = 'expression';
+          restriction.conditions = [];
+
+          var template;
+          if (scope.restriction.type === '') {
+            template = '<a ng-click="addExpression(restriction)">Expression</a> <a>And</a> <a>Or</a>';
+          } else if (scope.restriction.type === 'expression') {
+            template = '<label>Codition</label><select><option>Codition 1</option><option>Codition 2</option><option>Codition 3</option></select><div>Link to modal</div>';
+          } else {
+            template = '<div ng-repeat="condition in restriction.conditions"><div>{{restriction.type}}</div><div workflow-restriction restriction="condition"></div></div>';
+          }
+          element.append(template);
+          $compile(element.contents())(scope.$new());
+        };
+      }
+    };
+  })
   .directive('workflowStep', function() {
     return {
       priority: 100,
@@ -172,21 +188,27 @@ angular.module('wireWorkflowApp')
       link: function(scope, element) {
         var actionItems = [{
           name: 'Pre-Functions',
+          type: 'pre-function',
           items: []
         }, {
           name: 'Post-Functions',
+          type: 'post-function',
           items: []
         }, {
           name: 'Validators',
+          type: 'validator',
           items: []
         }, {
           name: 'Conditions',
+          type: 'codition',
           items: []
         }, {
           name: 'Result',
+          type: 'result',
           items: []
         }, {
           name: 'Codition Results',
+          type: 'condition-result',
           items: []
         }];
 
@@ -206,25 +228,43 @@ angular.module('wireWorkflowApp')
         scope.showStep = function(step) {
           scope.workflow.currentStep = step;
           scope.workflow.template.url = 'views/step-details.html';
-        }
+        };
 
         scope.showAction = function(action) {
           scope.workflow.currentAction = action;
           scope.workflow.template.url = 'views/action-details.html';
-        }
+        };
 
         scope.showItem = function(item) {
           scope.workflow.currentItem = item;
-          scope.workflow.template.url = 'views/item-details.html';
+          if (item.type === 'codition') {
+            scope.workflow.template.url = 'views/codition-details.html';
+          } else {
+            scope.workflow.template.url = 'views/item-details.html';
+          }
         };
 
         scope.addItem = function(item) {
-          scope.workflow.currentItem = {
-            name: item.name + ' ' + (item.items.length + 1)
-          };
-          item.items.push(scope.workflow.currentItem);
+          if (item.type === 'codition') {
+            scope.workflow.currentItem = {
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type,
+              restriction: {
+                type: '',
+                conditions: []
+              }
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/codition-details.html';
+          } else {
+            scope.workflow.currentItem = {
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/item-details.html';
+          }
           item.show = true;
-          scope.workflow.template.url = 'views/item-details.html';
         };
 
         scope.$watch(function() {
