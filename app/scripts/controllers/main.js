@@ -15,12 +15,13 @@ function updateTransictions(scope) {
     var top, left, height;
 
     if (transiction.stepFrom < transiction.stepTo) {
-      top = stepFrom.offsetTop + (stepFrom.offsetHeight / 2);
-      left = (stepFrom.offsetWidth + 12) - (transictionEl.prev().length * 17);
-      height = stepTo.offsetTop + (stepTo.offsetHeight / 2) - top;
 
-      transictionEl.css('margin-top', (top - workflowEl.offsetHeight - 34) + 'px');
-      transictionEl.css('left', 279 + 'px');
+      top = ((transiction.stepFrom - 1) * stepFrom.offsetHeight) + Math.round(stepFrom.offsetHeight / 2);
+      left = (stepFrom.offsetWidth + 35) - (transictionEl.prev().length * 17);
+      height = (transiction.stepTo - transiction.stepFrom) * stepFrom.offsetHeight;
+
+      transictionEl.css('margin-top', top + 'px');
+      transictionEl.css('left', left + 'px');
       transictionEl.css('height', height + 'px');
     } else {
       top = stepTo.offsetTop + (stepTo.offsetHeight / 2);
@@ -70,8 +71,7 @@ angular.module('wireWorkflowApp')
           conditions: []
         }]
       },
-      transictions: [
-        /*{
+      transictions: [{
         id: '1',
         stepFrom: '1',
         stepTo: '3'
@@ -83,9 +83,28 @@ angular.module('wireWorkflowApp')
         id: '3',
         stepFrom: '3',
         stepTo: '1'
-      }*/
-      ],
-      steps: []
+      }],
+      steps: [{
+        id: 1,
+        name: 'Step ' + 1,
+        show: false,
+        actions: []
+      }, {
+        id: 2,
+        name: 'Step ' + 2,
+        show: false,
+        actions: []
+      }, {
+        id: 3,
+        name: 'Step ' + 3,
+        show: false,
+        actions: []
+      }, {
+        id: 4,
+        name: 'Step ' + 4,
+        show: false,
+        actions: []
+      }]
     };
 
 
@@ -132,12 +151,17 @@ angular.module('wireWorkflowApp')
       };
     }
   ])
-  .directive('onRepeatDone', function() {
+  .directive('onRepeatDone', function($timeout) {
     return {
       priority: 10,
       restriction: 'A',
-      link: function($scope, element, attributes) {
-        $scope.$emit(attributes.onRepeatDone || 'repeat_done', element);
+      link: function(scope, element, attributes) {
+        if (scope.$last === true) {
+          $timeout(function() {
+            scope.$emit(attributes.onRepeatDone || 'repeat_done', element);
+          });
+        }
+
       }
     };
   })

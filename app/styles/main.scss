@@ -55,6 +55,11 @@ body {
 
 
 .workflow {
+
+  div[workflow-step] {
+    width: 290px;
+  }
+
   a {
     text-decoration: none;
     cursor: pointer;

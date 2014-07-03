@@ -1,0 +1,19 @@
+<div class="restriction">
+  <div ng-switch on="restriction.type">
+    <div ng-switch-when="expression">
+      <label>Codition</label>
+      <select>
+        <option>Codition 1</option>
+        <option>Codition 2</option>
+        <option>Codition 3</option>
+      </select>
+      <div>Link to modal</div>
+    </div>
+    <div ng-switch-default>
+      <div ng-repeat="condition in restriction.conditions">
+        <div>{{restriction.type}}</div>
+        <div workflow-restriction restriction="condition"></div>
+      </div>
+    </div>
+  </div>
+</div>

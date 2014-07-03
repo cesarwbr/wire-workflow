@@ -5,21 +5,14 @@
   </h3>
   <div>
     <div class="workflow">
-
+      <div>
+        <div workflow-transiction></div>
+      </div>
       <ul>
         <li ng-repeat="step in workflow.steps">
           <div workflow-step="step" current-action="currentAction" workflow="workflow"></div>
         </li>
       </ul>
-    </div>
-    <div>
-      <!-- <div class="connection-left">
-    <div class="arrow-right"></div>
-  </div> -->
-      <!-- <div ng-class="transiction.type" step-from="step1" step-to="step2" transiction="{{transiction.id}}" ng-repeat="transiction in workflow.transictions">
-    <div ng-class="{'arrow-left': transiction.type == 'connection-right', 'arrow-right': transiction.type == 'connection-left'}"></div>
-  </div> -->
-      <div workflow-transiction></div>
     </div>
   </div>
 </div>
