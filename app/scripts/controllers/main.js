@@ -1,7 +1,7 @@
 'use strict';
 
 function updateTransictions(scope) {
-  var workflowEl = angular.element('.workflow')[0];
+  //var workflowEl = angular.element('.workflow')[0];
   for (var i = 0; i < scope.workflow.transictions.length; i++) {
     var transiction = scope.workflow.transictions[i];
     var transictionEl = angular.element('[transiction="' + transiction.id + '"]');
@@ -15,18 +15,17 @@ function updateTransictions(scope) {
     var top, left, height;
 
     if (transiction.stepFrom < transiction.stepTo) {
-
-      top = ((transiction.stepFrom - 1) * stepFrom.offsetHeight) + Math.round(stepFrom.offsetHeight / 2);
-      left = (stepFrom.offsetWidth + 35) - (transictionEl.prev().length * 17);
-      height = (transiction.stepTo - transiction.stepFrom) * stepFrom.offsetHeight;
+      top = (stepFrom.offsetTop - 67) + Math.round(stepFrom.offsetHeight / 2);
+      left = (stepFrom.offsetWidth + 51) - (transictionEl.prev().length * 17);
+      height = (stepTo.offsetTop - 67) + Math.round(stepTo.offsetHeight / 2) - top;
 
       transictionEl.css('margin-top', top + 'px');
       transictionEl.css('left', left + 'px');
       transictionEl.css('height', height + 'px');
     } else {
-      top = stepTo.offsetTop + (stepTo.offsetHeight / 2);
-      height = stepFrom.offsetTop + (stepFrom.offsetHeight / 2) - top;
-      transictionEl.css('margin-top', (top - workflowEl.offsetHeight - 34) + 'px');
+      top = (stepTo.offsetTop - 67) + Math.round(stepTo.offsetHeight / 2);
+      height = (stepFrom.offsetTop - 67);
+      transictionEl.css('margin-top', top + 'px');
       transictionEl.css('height', height + 'px');
     }
   }
@@ -141,7 +140,7 @@ angular.module('wireWorkflowApp')
               top = stepTo.offsetTop + (stepTo.offsetHeight / 2);
               height = stepFrom.offsetTop + (stepFrom.offsetHeight / 2) - top;
 
-              transictionEl.css('left', '-9px');
+              //transictionEl.css('left', '-9px');
               transictionEl.css('margin-top', top + 'px');
               transictionEl.css('height', height + 'px');
             }
