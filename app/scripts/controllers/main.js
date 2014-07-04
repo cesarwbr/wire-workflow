@@ -15,16 +15,16 @@ function updateTransictions(scope) {
     var top, left, height;
 
     if (transiction.stepFrom < transiction.stepTo) {
-      top = (stepFrom.offsetTop - 67) + Math.round(stepFrom.offsetHeight / 2);
-      left = (stepFrom.offsetWidth + 51) - (transictionEl.prev().length * 17);
-      height = (stepTo.offsetTop - 67) + Math.round(stepTo.offsetHeight / 2) - top;
+      top = stepFrom.offsetTop + Math.round(stepFrom.offsetHeight / 2);
+      left = (stepFrom.offsetWidth + 23) - (transictionEl.prev().length * 17);
+      height = stepTo.offsetTop + Math.round(stepTo.offsetHeight / 2) - top;
 
       transictionEl.css('margin-top', top + 'px');
       transictionEl.css('left', left + 'px');
       transictionEl.css('height', height + 'px');
     } else {
-      top = (stepTo.offsetTop - 67) + Math.round(stepTo.offsetHeight / 2);
-      height = (stepFrom.offsetTop - 67);
+      top = stepTo.offsetTop + Math.round(stepTo.offsetHeight / 2);
+      height = stepFrom.offsetTop;
       transictionEl.css('margin-top', top + 'px');
       transictionEl.css('height', height + 'px');
     }
@@ -39,6 +39,18 @@ angular.module('wireWorkflowApp')
       'Karma'
     ];
 
+
+    $scope.addTransition = function(currentStep) {
+      console.log(currentStep);
+      $scope.workflow.currentItem
+      $scope.workflow.transictions.push({
+        id: $scope.workflow.transictions.length,
+        stepFrom: $scope.workflow.currentItem.step.id,
+        stepTo: currentStep.name.id
+      });
+
+    };
+
     $scope.addStep = function() {
       $scope.workflow.currentStep = {
         id: 1,
@@ -49,6 +61,8 @@ angular.module('wireWorkflowApp')
       $scope.workflow.steps.push($scope.workflow.currentStep);
       $scope.workflow.template.url = 'views/step-details.html';
     };
+
+
 
     $scope.showWorkflow = function() {
       $scope.workflow.template.url = 'views/workflow-details.html';
@@ -71,10 +85,6 @@ angular.module('wireWorkflowApp')
         }]
       },
       transictions: [{
-        id: '1',
-        stepFrom: '1',
-        stepTo: '3'
-      }, {
         id: '2',
         stepFrom: '2',
         stepTo: '4'
@@ -140,7 +150,7 @@ angular.module('wireWorkflowApp')
               top = stepTo.offsetTop + (stepTo.offsetHeight / 2);
               height = stepFrom.offsetTop + (stepFrom.offsetHeight / 2) - top;
 
-              //transictionEl.css('left', '-9px');
+              transictionEl.css('left', '-30px');
               transictionEl.css('margin-top', top + 'px');
               transictionEl.css('height', height + 'px');
             }
@@ -262,14 +272,17 @@ angular.module('wireWorkflowApp')
           scope.workflow.currentItem = item;
           if (item.type === 'codition') {
             scope.workflow.template.url = 'views/codition-details.html';
+          } else if (item.type === 'result') {
+            scope.workflow.template.url = 'views/result-details.html';
           } else {
             scope.workflow.template.url = 'views/item-details.html';
           }
         };
 
-        scope.addItem = function(item) {
+        scope.addItem = function(item, step) {
           if (item.type === 'codition') {
             scope.workflow.currentItem = {
+              step: step,
               name: item.name + ' ' + (item.items.length + 1),
               type: item.type,
               restriction: {
@@ -279,8 +292,17 @@ angular.module('wireWorkflowApp')
             };
             item.items.push(scope.workflow.currentItem);
             scope.workflow.template.url = 'views/codition-details.html';
+          } if (item.type === 'result') {
+            scope.workflow.currentItem = {
+              step: step,
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/result-details.html';
           } else {
             scope.workflow.currentItem = {
+              step: step,
               name: item.name + ' ' + (item.items.length + 1),
               type: item.type
             };
