@@ -42,7 +42,6 @@ angular.module('wireWorkflowApp')
 
     $scope.addTransition = function(currentStep) {
       console.log(currentStep);
-      $scope.workflow.currentItem
       $scope.workflow.transictions.push({
         id: $scope.workflow.transictions.length,
         stepFrom: $scope.workflow.currentItem.step.id,
