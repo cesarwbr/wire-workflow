@@ -39,6 +39,40 @@ angular.module('wireWorkflowApp')
       'Karma'
     ];
 
+    $scope.sections = {
+      steps: {
+        show: false
+      },
+      initialActions: {
+        show: false
+      },
+      splits: {
+        show: false
+      },
+      joins: {
+        show: false
+      }
+    };
+
+    $scope.showHide = function(sectionName, type) {
+
+      for (var section in $scope.sections) {
+        if (section !== sectionName) {
+          $scope.sections[section].show = false;
+        }
+      }
+
+      if (!type) {
+        $scope.sections[sectionName].show = $scope.sections[sectionName].show ? false : true;
+      } else {
+        if (type === 'show') {
+          $scope.sections[sectionName].show = true;
+        } else if (type === 'hide') {
+          $scope.sections[sectionName].show = false;
+        }
+      }
+    };
+
 
     $scope.addTransition = function(currentStep) {
       console.log(currentStep);
@@ -59,6 +93,7 @@ angular.module('wireWorkflowApp')
       };
       $scope.workflow.steps.push($scope.workflow.currentStep);
       $scope.workflow.template.url = 'views/step-details.html';
+      $scope.showHide('steps', 'show');
     };
 
 
@@ -92,6 +127,7 @@ angular.module('wireWorkflowApp')
         stepFrom: '3',
         stepTo: '1'
       }],
+      initialActions: [],
       steps: [{
         id: 1,
         name: 'Step ' + 1,
@@ -209,6 +245,18 @@ angular.module('wireWorkflowApp')
       }
     };
   })
+  .directive('steps', function() {
+    return {
+      restriction: 'A',
+      templateUrl: '/views/steps.html'
+    };
+  })
+  .directive('initialActions', function() {
+    return {
+      restriction: 'A',
+      templateUrl: '/views/initial-actions.html'
+    };
+  })
   .directive('workflowStep', function() {
     return {
       priority: 100,
@@ -291,7 +339,8 @@ angular.module('wireWorkflowApp')
             };
             item.items.push(scope.workflow.currentItem);
             scope.workflow.template.url = 'views/codition-details.html';
-          } if (item.type === 'result') {
+          }
+          if (item.type === 'result') {
             scope.workflow.currentItem = {
               step: step,
               name: item.name + ' ' + (item.items.length + 1),

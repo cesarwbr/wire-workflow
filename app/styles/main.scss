@@ -53,8 +53,43 @@ body {
   left: 12px;
 }
 
+.up-down {
+  @extend .glyphicon;
+}
+
+.down {
+  @extend .glyphicon-chevron-down;
+}
+
+.up {
+  @extend .glyphicon-chevron-up;
+}
+
+.add {
+  @extend .glyphicon;
+  @extend .glyphicon-plus-sign;
+}
+
 
 .workflow {
+
+  .section-title {
+    border-bottom: 1px solid #B4B4B4;
+    width: 344px;
+    padding-top: 10px;
+    color: #9B9B9B;
+    font-size: 0.9em;
+    cursor: pointer;
+
+    > .up-down {
+      font-size: 0.8em;
+    }
+
+    > .add {
+      font-size: 0.9em;
+      color: green;
+    }
+  }
 
   a {
     text-decoration: none;
@@ -63,6 +98,7 @@ body {
 
   z-index: 100;
   ul {
+    padding-top: 10px;
     padding-left: 51px;
     position: relative;
     left: -29px;
