@@ -91,6 +91,10 @@ body {
     }
   }
 
+  .section-content {
+    padding-top: 10px;
+  }
+
   a {
     text-decoration: none;
     cursor: pointer;
@@ -98,7 +102,6 @@ body {
 
   z-index: 100;
   ul {
-    padding-top: 10px;
     padding-left: 51px;
     position: relative;
     left: -29px;
