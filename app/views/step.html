@@ -9,42 +9,6 @@
 </div>
 <ul class="actions" ng-class="{show: step.show}">
   <li ng-repeat="action in step.actions">
-    <div>
-      <div class="workflow-item">
-        <div class="sub-item" ng-click="action.show = !action.show">{{action.name}}
-          <a class="glyphicon glyphicon-chevron-down"></a>
-        </div>
-        <div class="features">
-          <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showAction(action)"></a>
-        </div>
-      </div>
-    </div>
-    <ul class="actions-items" ng-class="{show: action.show}">
-      <li ng-repeat="actionItem in action.actionItems">
-        <div>
-          <div class="workflow-item">
-            <div class="sub-item" ng-click="actionItem.show = !actionItem.show">{{actionItem.name}}
-              <a class="glyphicon glyphicon-chevron-down"></a>
-            </div>
-            <div class="features">
-              <a class="add glyphicon glyphicon-plus-sign" alt="Adicionar Item" title="Adicionar Item" ng-click="addItem(actionItem, step)"></a>
-            </div>
-          </div>
-          <ul class="items" ng-class="{show: actionItem.show}">
-            <li ng-repeat="item in actionItem.items">
-              <div>
-                <div class="workflow-item">
-                  <div class="leaf">{{item.name}}
-                  </div>
-                  <div class="features">
-                    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showItem(item)"></a>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+    <div action="action" workflow="workflow"></div>
   </li>
 </ul>

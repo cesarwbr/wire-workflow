@@ -54,6 +54,32 @@ angular.module('wireWorkflowApp')
       }
     };
 
+    var actionItems = [{
+      name: 'Pre-Functions',
+      type: 'pre-function',
+      items: []
+    }, {
+      name: 'Post-Functions',
+      type: 'post-function',
+      items: []
+    }, {
+      name: 'Validators',
+      type: 'validator',
+      items: []
+    }, {
+      name: 'Conditions',
+      type: 'codition',
+      items: []
+    }, {
+      name: 'Result',
+      type: 'result',
+      items: []
+    }, {
+      name: 'Codition Results',
+      type: 'condition-result',
+      items: []
+    }];
+
     $scope.showHide = function(sectionName, type) {
 
       for (var section in $scope.sections) {
@@ -96,7 +122,17 @@ angular.module('wireWorkflowApp')
       $scope.showHide('steps', 'show');
     };
 
+    $scope.addInitialAction = function() {
+      $scope.workflow.currentAction = {
+        name: 'Action ' + ($scope.workflow.initialActions.length + 1),
+        actionItems: actionItems,
+        show: true
+      };
 
+      $scope.workflow.initialActions.push($scope.workflow.currentAction);
+      $scope.workflow.template.url = 'views/action-details.html';
+      $scope.showHide('initialActions', 'show');
+    };
 
     $scope.showWorkflow = function() {
       $scope.workflow.template.url = 'views/workflow-details.html';
@@ -105,6 +141,7 @@ angular.module('wireWorkflowApp')
 
     $scope.workflow = {
       name: 'Testing',
+      initialActions: [],
       currentAction: {},
       currentStep: {},
       currentItem: {},
@@ -127,7 +164,6 @@ angular.module('wireWorkflowApp')
         stepFrom: '3',
         stepTo: '1'
       }],
-      initialActions: [],
       steps: [{
         id: 1,
         name: 'Step ' + 1,
@@ -255,6 +291,64 @@ angular.module('wireWorkflowApp')
     return {
       restriction: 'A',
       templateUrl: '/views/initial-actions.html'
+    };
+  })
+  .directive('action', function() {
+    return {
+      restriction: 'A',
+      scope: {
+        action: '=',
+        workflow: '=workflow'
+      },
+      templateUrl: '/views/action.html',
+      link: function(scope) {
+        scope.showAction = function(action) {
+          scope.workflow.currentAction = action;
+          scope.workflow.template.url = 'views/action-details.html';
+        };
+
+        scope.showItem = function(item) {
+          scope.workflow.currentItem = item;
+          if (item.type === 'codition') {
+            scope.workflow.template.url = 'views/codition-details.html';
+          } else if (item.type === 'result') {
+            scope.workflow.template.url = 'views/result-details.html';
+          } else {
+            scope.workflow.template.url = 'views/item-details.html';
+          }
+        };
+
+        scope.addItem = function(item) {
+          if (item.type === 'codition') {
+            scope.workflow.currentItem = {
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type,
+              restriction: {
+                type: '',
+                conditions: []
+              }
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/codition-details.html';
+          }
+          if (item.type === 'result') {
+            scope.workflow.currentItem = {
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/result-details.html';
+          } else {
+            scope.workflow.currentItem = {
+              name: item.name + ' ' + (item.items.length + 1),
+              type: item.type
+            };
+            item.items.push(scope.workflow.currentItem);
+            scope.workflow.template.url = 'views/item-details.html';
+          }
+          item.show = true;
+        };
+      }
     };
   })
   .directive('workflowStep', function() {

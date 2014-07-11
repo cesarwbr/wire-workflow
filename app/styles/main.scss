@@ -109,93 +109,93 @@ body {
   ul > li {
     list-style-type: none;
     width: 267px;
+  }
 
-    .workflow-item {
-      padding-bottom: 4px;
-      overflow: hidden;
-      > div {
-        background-color: #f6f6f6;
-        background-repeat: no-repeat;
-        border: 1px solid #dadada;
-      }
+  .workflow-item {
+    padding-bottom: 4px;
+    overflow: hidden;
+    > div {
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      border: 1px solid #dadada;
     }
+  }
 
 
-    .step {
-      background-image: url(../images/step.png);
-      background-position: left 10px top 8px;
+  .step {
+    background-image: url(../images/step.png);
+    background-position: left 10px top 8px;
 
-      padding: 5px 0  5px 33px;
+    padding: 5px 0  5px 33px;
 
-      -webkit-border-top-left-radius: 5px;
-      -webkit-border-bottom-left-radius: 5px;
-      -moz-border-radius-topleft: 5px;
-      -moz-border-radius-bottomleft: 5px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
-      float: left;
-      clear: both;
-      width: 220px;
+    float: left;
+    clear: both;
+    width: 220px;
 
-      a {
-        font-size: 10px;
-        float: right;
-        padding: 5px 20px;
-        text-decoration: none;
-        cursor: pointer;
-      }
-    }
-
-    .actions {
-      display: none;
-      li {
-        width: 250px;
-      }
-      .sub-item {
-        @extend .step;
-        background-image: url(../images/action.png);
-      }
-    }
-
-    .actions-items {
-      @extend .actions;
-      li {
-        width: 250px;
-      }
-    }
-
-    .items {
-      @extend .actions;
-      li {
-        width: 250px;
-      }
-      .leaf {
-        @extend .step;
-        background-image: url(../images/leaf.png);
-        background-position: left 10px top 11px;
-      }
-    }
-
-    .features {
-
-      -webkit-border-top-right-radius: 5px;
-      -webkit-border-bottom-right-radius: 5px;
-      -moz-border-radius-topright: 5px;
-      -moz-border-radius-bottomright: 5px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
+    a {
+      font-size: 10px;
       float: right;
+      padding: 5px 20px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
 
-      // background-image: url(../images/list.png);
+  .actions {
+    display: none;
+    li {
+      width: 250px;
+    }
+    .sub-item {
+      @extend .step;
+      background-image: url(../images/action.png);
+    }
+  }
 
-      background-position: left 5px top 8px;
-      height: 31px;
-      padding: 6px 5px 0 5px;
+  .actions-items {
+    @extend .actions;
+    li {
+      width: 250px;
+    }
+  }
 
-      .add {
-        color: green;
-      }
+  .items {
+    @extend .actions;
+    li {
+      width: 250px;
+    }
+    .leaf {
+      @extend .step;
+      background-image: url(../images/leaf.png);
+      background-position: left 10px top 11px;
+    }
+  }
+
+  .features {
+
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    float: right;
+
+    // background-image: url(../images/list.png);
+
+    background-position: left 5px top 8px;
+    height: 31px;
+    padding: 6px 5px 0 5px;
+
+    .add {
+      color: green;
     }
   }
 }

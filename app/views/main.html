@@ -5,9 +5,9 @@
   <div>
     <div class="workflow">
       <div class="section-title">
-        <a class="up-down" ng-class="{down: !sections.initialActions.show, up: sections.initialActions.show}" ng-click="showHide('initialActions')"></a>  <span ng-click="showHide('initialActions')">Initial Actions</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ></a>
+        <a class="up-down" ng-class="{down: !sections.initialActions.show, up: sections.initialActions.show}" ng-click="showHide('initialActions')"></a>  <span ng-click="showHide('initialActions')">Initial Actions</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ng-click="addInitialAction()"></a>
       </div>
-      <!-- <div initial-actions></div> -->
+      <div initial-actions ng-show="sections.initialActions.show" class="section-content"></div>
       <div class="section-title">
         <a class="up-down" ng-class="{down: !sections.steps.show, up: sections.steps.show}" ng-click="showHide('steps')"></a> <span ng-click="showHide('steps')">Steps</span> <a class="add" alt="Adicionar Action" title="Adicionar Steps" ng-click="addStep()"></a>
       </div>

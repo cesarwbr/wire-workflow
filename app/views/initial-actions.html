@@ -1,5 +1,6 @@
-<ul>
-  <li ng-repeat="actions in workflow.initialActions">
-    <div workflow-step="step" current-action="currentAction" workflow="workflow"></div>
+<ul class="actions" ng-class="{show: sections.initialActions.show}">
+  <li ng-repeat="action in workflow.initialActions">
+    <div action="action" workflow="workflow"></div>
   </li>
 </ul>
+
