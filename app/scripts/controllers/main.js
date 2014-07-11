@@ -290,7 +290,11 @@ angular.module('wireWorkflowApp')
   .directive('initialActions', function() {
     return {
       restriction: 'A',
-      templateUrl: '/views/initial-actions.html'
+      templateUrl: '/views/initial-actions.html',
+      link: function(scope, element) {
+        // Sort action items
+        //$(element.children()[0]).sortable();
+      }
     };
   })
   .directive('action', function() {
@@ -298,13 +302,21 @@ angular.module('wireWorkflowApp')
       restriction: 'A',
       scope: {
         action: '=',
-        workflow: '=workflow'
+        workflow: '=workflow',
+        actionarray: '=actionarray'
       },
       templateUrl: '/views/action.html',
       link: function(scope) {
         scope.showAction = function(action) {
           scope.workflow.currentAction = action;
           scope.workflow.template.url = 'views/action-details.html';
+        };
+
+        scope.removeAction = function(action) {
+          var index = scope.actionarray.indexOf(action);
+          if (index >= 0) {
+            scope.actionarray.splice(index, 1);
+          }
         };
 
         scope.showItem = function(item) {

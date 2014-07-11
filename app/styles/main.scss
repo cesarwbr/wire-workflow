@@ -70,6 +70,12 @@ body {
   @extend .glyphicon-plus-sign;
 }
 
+.remove-icon {
+  @extend .glyphicon;
+  @extend .glyphicon-minus-sign;
+  color: red;
+}
+
 
 .workflow {
 
@@ -151,7 +157,7 @@ body {
   .actions {
     display: none;
     li {
-      width: 250px;
+      width: 266px;
     }
     .sub-item {
       @extend .step;

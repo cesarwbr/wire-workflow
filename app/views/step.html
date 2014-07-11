@@ -9,6 +9,6 @@
 </div>
 <ul class="actions" ng-class="{show: step.show}">
   <li ng-repeat="action in step.actions">
-    <div action="action" workflow="workflow"></div>
+    <div action="action" workflow="workflow" actionarray="step.actions"></div>
   </li>
 </ul>

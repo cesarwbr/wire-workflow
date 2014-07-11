@@ -1,6 +1,6 @@
 <ul class="actions" ng-class="{show: sections.initialActions.show}">
   <li ng-repeat="action in workflow.initialActions">
-    <div action="action" workflow="workflow"></div>
+    <div action="action" workflow="workflow" actionarray="workflow.initialActions"></div>
   </li>
 </ul>
 
