@@ -122,6 +122,8 @@ angular.module('wireWorkflowApp')
       $scope.showHide('steps', 'show');
     };
 
+
+
     $scope.addInitialAction = function() {
       $scope.workflow.currentAction = {
         name: 'Action ' + ($scope.workflow.initialActions.length + 1),
@@ -330,6 +332,13 @@ angular.module('wireWorkflowApp')
           }
         };
 
+        scope.removeItem = function(item, list) {
+          var index = list.indexOf(item);
+          if (index >= 0) {
+            list.splice(index, 1);
+          }
+        };
+
         scope.addItem = function(item) {
           if (item.type === 'codition') {
             scope.workflow.currentItem = {
@@ -414,6 +423,13 @@ angular.module('wireWorkflowApp')
         scope.showStep = function(step) {
           scope.workflow.currentStep = step;
           scope.workflow.template.url = 'views/step-details.html';
+        };
+
+        scope.removeStep = function(step) {
+          var index = scope.workflow.steps.indexOf(step);
+          if (index >= 0) {
+            scope.workflow.steps.splice(index, 1);
+          }
         };
 
         scope.showAction = function(action) {

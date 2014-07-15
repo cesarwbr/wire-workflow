@@ -1,8 +1,8 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
-@import 'sass-bootstrap/lib/bootstrap';
+@import "sass-bootstrap/lib/bootstrap";
 
-$transiction_color: #bbb;
+$transiction_color: #bbbbbb;
 
 .browsehappy {
     margin: 0.2em 0;
@@ -18,7 +18,6 @@ body {
     background: #eee;
 }
 
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
@@ -27,218 +26,210 @@ body {
 }
 
 .show {
-  display: block;
+    display: block;
 }
 
 .arrow-left {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid;
-  border-right-color: $transiction_color;
-  bottom: -5px;
-  position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid;
+    border-right-color: $transiction_color;
+    bottom: -5px;
+    position: absolute;
 }
 
 .arrow-right {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid;
-  border-left-color: $transiction_color;
-  top: -5px;
-  position: absolute;
-  left: 12px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid;
+    border-left-color: $transiction_color;
+    top: -5px;
+    position: absolute;
+    left: 12px;
 }
 
 .up-down {
-  @extend .glyphicon;
+    @extend .glyphicon;
 }
 
 .down {
-  @extend .glyphicon-chevron-down;
+    @extend .glyphicon-chevron-down;
 }
 
 .up {
-  @extend .glyphicon-chevron-up;
+    @extend .glyphicon-chevron-up;
 }
 
 .add {
-  @extend .glyphicon;
-  @extend .glyphicon-plus-sign;
+    @extend .glyphicon;
+    @extend .glyphicon-plus-sign;
 }
 
 .remove-icon {
-  @extend .glyphicon;
-  @extend .glyphicon-minus-sign;
-  color: red;
+    @extend .glyphicon;
+    @extend .glyphicon-minus-sign;
+    color: red;
 }
 
-
 .workflow {
-
-  .section-title {
-    border-bottom: 1px solid #B4B4B4;
-    width: 344px;
-    padding-top: 10px;
-    color: #9B9B9B;
-    font-size: 0.9em;
-    cursor: pointer;
-
-    > .up-down {
-      font-size: 0.8em;
+    .section-title {
+        border-bottom: 1px solid #B4B4B4;
+        width: 344px;
+        padding-top: 10px;
+        color: #9B9B9B;
+        font-size: 0.9em;
+        cursor: pointer;
+        > .up-down {
+            font-size: 0.8em;
+        }
+        > .add {
+            font-size: 0.9em;
+            color: green;
+        }
     }
-
-    > .add {
-      font-size: 0.9em;
-      color: green;
+    .section-content {
+        padding-top: 10px;
     }
-  }
-
-  .section-content {
-    padding-top: 10px;
-  }
-
-  a {
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  z-index: 100;
-  ul {
-    padding-left: 51px;
-    position: relative;
-    left: -29px;
-  }
-  ul > li {
-    list-style-type: none;
-    width: 267px;
-  }
-
-  .workflow-item {
-    padding-bottom: 4px;
-    overflow: hidden;
-    > div {
-      background-color: #f6f6f6;
-      background-repeat: no-repeat;
-      border: 1px solid #dadada;
-    }
-  }
-
-
-  .step {
-    background-image: url(../images/step.png);
-    background-position: left 10px top 8px;
-
-    padding: 5px 0  5px 33px;
-
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-
-    float: left;
-    clear: both;
-    width: 220px;
-
     a {
-      font-size: 10px;
-      float: right;
-      padding: 5px 20px;
-      text-decoration: none;
-      cursor: pointer;
+        text-decoration: none;
+        cursor: pointer;
     }
-  }
-
-  .actions {
-    display: none;
-    li {
-      width: 266px;
+    z-index: 100;
+    ul {
+        padding-left: 51px;
+        position: relative;
+        left: -29px;
     }
-    .sub-item {
-      @extend .step;
-      background-image: url(../images/action.png);
+    ul > li {
+        list-style-type: none;
+        width: 284px;
     }
-  }
-
-  .actions-items {
-    @extend .actions;
-    li {
-      width: 250px;
+    .workflow-item {
+        padding-bottom: 4px;
+        overflow: hidden;
+        > div {
+            background-color: #f6f6f6;
+            background-repeat: no-repeat;
+            border: 1px solid #dadada;
+        }
     }
-  }
-
-  .items {
-    @extend .actions;
-    li {
-      width: 250px;
+    .step {
+        background-image: url(../images/step.png);
+        background-position: left 10px top 8px;
+        padding: 5px 0  5px 33px;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        float: left;
+        clear: both;
+        width: 220px;
+        a {
+            font-size: 10px;
+            float: right;
+            padding: 5px 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
-    .leaf {
-      @extend .step;
-      background-image: url(../images/leaf.png);
-      background-position: left 10px top 11px;
+    .actions {
+        display: none;
+        li {
+            width: 266px;
+        }
+        .sub-item {
+            @extend .step;
+            background-image: url(../images/action.png);
+        }
     }
-  }
-
-  .features {
-
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    float: right;
-
-    // background-image: url(../images/list.png);
-
-    background-position: left 5px top 8px;
-    height: 31px;
-    padding: 6px 5px 0 5px;
-
-    .add {
-      color: green;
+    .actions-items {
+        @extend .actions;
+        li {
+            width: 250px;
+        }
     }
-  }
+    .items {
+        @extend .actions;
+        li {
+            width: 266px;
+        }
+        .leaf {
+            @extend .step;
+            background-image: url(../images/leaf.png);
+            background-position: left 10px top 11px;
+        }
+    }
+    .features {
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        float: right;
+        // background-image: url(../images/list.png);
+        background-position: left 5px top 8px;
+        height: 31px;
+        padding: 6px 5px 0 5px;
+        .add {
+            color: green;
+        }
+    }
 }
 
 h3 {
-  font-size: 1em;
-  font-weight: bold;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .container {
-  overflow-y: auto;
-  height: 600px;
-  width: 750px;
-  display: table;
+    overflow-y: auto;
+    height: 600px;
+    width: 750px;
+    display: table;
 }
 
 .workflow-menu {
-  display: table-cell;
-  width: 420px;
+    display: table-cell;
+    width: 420px;
 }
 
 .workflow-details {
-  display: table-cell;
+    display: table-cell;
 }
 
 .connection {
-  width: 17px;
-  position: relative;
-  border: 1px dashed $transiction_color;
-  float: left;
+    width: 17px;
+    position: relative;
+    border: 1px dashed $transiction_color;
+    float: left;
 }
 
 .connection-left {
-  border-right: 0;
+    border-right: 0;
 }
 
 .connection-right {
-  border-left: 0;
+    border-left: 0;
 }
 
+.my-show-hide-animation.ng-hide-add,
+.my-show-hide-animation.ng-hide-remove {
+    -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+    -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+    -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+    -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+    transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+    position: relative;
+    display: block;
+}
+
+.my-show-hide-animation.ng-hide {
+    opacity: 0;
+}
