@@ -5,231 +5,353 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 $transiction_color: #bbbbbb;
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background: #eee;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #eee;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
+  .container {
+    max-width: 730px;
+  }
 }
 
 .show {
-    display: block;
+  display: block;
 }
 
 .arrow-left {
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-right: 5px solid;
-    border-right-color: $transiction_color;
-    bottom: -5px;
-    position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid;
+  border-right-color: $transiction_color;
+  bottom: -5px;
+  position: absolute;
 }
 
 .arrow-right {
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid;
-    border-left-color: $transiction_color;
-    top: -5px;
-    position: absolute;
-    left: 12px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid;
+  border-left-color: $transiction_color;
+  top: -5px;
+  position: absolute;
+  left: 12px;
 }
 
 .up-down {
-    @extend .glyphicon;
+  @extend .glyphicon;
 }
 
 .down {
-    @extend .glyphicon-chevron-down;
+  @extend .glyphicon-chevron-down;
 }
 
 .up {
-    @extend .glyphicon-chevron-up;
+  @extend .glyphicon-chevron-up;
 }
 
 .add {
-    @extend .glyphicon;
-    @extend .glyphicon-plus-sign;
+  @extend .glyphicon;
+  @extend .glyphicon-plus-sign;
 }
 
 .remove-icon {
-    @extend .glyphicon;
-    @extend .glyphicon-minus-sign;
-    color: red;
+  @extend .glyphicon;
+  @extend .glyphicon-minus-sign;
+  color: red;
 }
 
 .workflow {
-    .section-title {
-        border-bottom: 1px solid #B4B4B4;
-        width: 344px;
-        padding-top: 10px;
-        color: #9B9B9B;
-        font-size: 0.9em;
-        cursor: pointer;
-        > .up-down {
-            font-size: 0.8em;
-        }
-        > .add {
-            font-size: 0.9em;
-            color: green;
-        }
+  .section-title {
+    border-bottom: 1px dashed #B4B4B4;
+    width: 344px;
+    padding-top: 10px;
+    color: #9B9B9B;
+    font-size: 0.9em;
+    cursor: pointer;
+    > .up-down {
+      font-size: 0.8em;
     }
-    .section-content {
-        padding-top: 10px;
+    > .add {
+      font-size: 0.9em;
+      color: green;
     }
+  }
+  .section-content {
+    padding-top: 10px;
+  }
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  z-index: 100;
+  ul {
+    padding-left: 51px;
+    position: relative;
+    left: -42px;
+  }
+  ul > li {
+    list-style-type: none;
+    width: 276px;
+  }
+  .workflow-item {
+    padding-bottom: 4px;
+    overflow: hidden;
+    > div {
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      border: 1px solid #dadada;
+      font-size: 0.85em;
+    }
+  }
+  .step {
+    background-image: url(../images/step.png);
+    background-position: left 10px top 8px;
+    padding: 5px 0  5px 33px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    float: left;
+    clear: both;
+    width: 220px;
     a {
-        text-decoration: none;
-        cursor: pointer;
+      float: right;
+      padding: 5px 20px;
+      text-decoration: none;
+      cursor: pointer;
     }
-    z-index: 100;
-    ul {
-        padding-left: 51px;
-        position: relative;
-        left: -29px;
+  }
+  .actions {
+    display: none;
+    li {
+      width: 261px;
     }
-    ul > li {
-        list-style-type: none;
-        width: 284px;
+    .sub-item {
+      @extend .step;
+      background-image: url(../images/action.png);
     }
-    .workflow-item {
-        padding-bottom: 4px;
-        overflow: hidden;
-        > div {
-            background-color: #f6f6f6;
-            background-repeat: no-repeat;
-            border: 1px solid #dadada;
-        }
+  }
+  .actions-items {
+    @extend .actions;
+    li {
+      width: 246px;
     }
-    .step {
-        background-image: url(../images/step.png);
-        background-position: left 10px top 8px;
-        padding: 5px 0  5px 33px;
-        -webkit-border-top-left-radius: 5px;
-        -webkit-border-bottom-left-radius: 5px;
-        -moz-border-radius-topleft: 5px;
-        -moz-border-radius-bottomleft: 5px;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        float: left;
-        clear: both;
-        width: 220px;
-        a {
-            font-size: 10px;
-            float: right;
-            padding: 5px 20px;
-            text-decoration: none;
-            cursor: pointer;
-        }
+  }
+  .items {
+    @extend .actions;
+    li {
+      width: 261px;
     }
-    .actions {
-        display: none;
-        li {
-            width: 266px;
-        }
-        .sub-item {
-            @extend .step;
-            background-image: url(../images/action.png);
-        }
+    .leaf {
+      @extend .step;
+      background-image: url(../images/leaf.png);
+      background-position: left 10px top 11px;
+      height: 34px;
     }
-    .actions-items {
-        @extend .actions;
-        li {
-            width: 250px;
-        }
+  }
+  .features {
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    float: right;
+    // background-image: url(../images/list.png);
+    background-position: left 5px top 8px;
+    height: 34px;
+    padding: 9px 5px 0 5px;
+    .add {
+      color: green;
     }
-    .items {
-        @extend .actions;
-        li {
-            width: 266px;
-        }
-        .leaf {
-            @extend .step;
-            background-image: url(../images/leaf.png);
-            background-position: left 10px top 11px;
-        }
-    }
-    .features {
-        -webkit-border-top-right-radius: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomright: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        float: right;
-        // background-image: url(../images/list.png);
-        background-position: left 5px top 8px;
-        height: 31px;
-        padding: 6px 5px 0 5px;
-        .add {
-            color: green;
-        }
-    }
+  }
 }
 
 h3 {
-    font-size: 1em;
-    font-weight: bold;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .container {
-    overflow-y: auto;
-    height: 600px;
-    width: 750px;
-    display: table;
+  overflow-y: auto;
+  height: 600px;
+  width: 1000px;
+  display: table;
 }
 
 .workflow-menu {
-    display: table-cell;
-    width: 420px;
+  display: table-cell;
+  width: 482px;
 }
 
 .workflow-details {
-    display: table-cell;
+  display: table-cell;
+  font-size: 0.85em;
 }
 
 .connection {
-    width: 17px;
-    position: relative;
-    border: 1px dashed $transiction_color;
-    float: left;
+  width: 17px;
+  position: relative;
+  border: 1px dashed $transiction_color;
+  float: left;
 }
 
 .connection-left {
-    border-right: 0;
+  border-right: 0;
 }
 
 .connection-right {
-    border-left: 0;
+  border-left: 0;
 }
 
 .my-show-hide-animation.ng-hide-add,
 .my-show-hide-animation.ng-hide-remove {
-    -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-    -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-    -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-    -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-    transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-    position: relative;
-    display: block;
+  -webkit-transition: 500ms all;
+  -moz-transition: 500ms all;
+  -ms-transition: 500ms all;
+  -o-transition: 500ms all;
+  transition: 500ms all;
+  // -webkit-transform: 400ms scaleY(1);
+  // -moz-transform: 400ms scaleY(1);
+  // -ms-transform: 400ms scaleY(1);
+  // -o-transform: 400ms scaleY(1);
+  // transform: 400ms scaleY(1);
+  height: 270px;
+  // opacity: 1;
+  position: relative;
+  display: block;
 }
 
 .my-show-hide-animation.ng-hide {
+  opacity: 0;
+}
+
+.list-animation-enter {
+  -webkit-animation: enter 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  animation: enter 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  display: block;
+  position: relative;
+}
+
+@-webkit-keyframes enter {
+  from {
     opacity: 0;
+    height: 0px;
+  }
+  20% {
+    opacity: .5;
+  }
+  40% {
+    opacity: .15;
+    color: red;
+  }
+  60% {
+    opacity: .75;
+  }
+  80% {
+    opacity: .3;
+  }
+  to {
+    opacity: 1;
+    height: 30px;
+  }
+}
+
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  20% {
+    opacity: .5;
+  }
+  40% {
+    opacity: .15;
+    color: red;
+  }
+  60% {
+    opacity: .75;
+  }
+  80% {
+    opacity: .3;
+  }
+  to {
+    opacity: 1;
+    height: 30px;
+  }
+}
+
+
+.list-animation-leave {
+  -webkit-animation: leave 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  animation: leave 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  display: block;
+  position: relative;
+}
+
+@-webkit-keyframes leave {
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+  80% {
+    opacity: .25;
+  }
+  60% {
+    opacity: .10;
+    color: red;
+  }
+  40% {
+    opacity: .5;
+  }
+  20% {
+    opacity: .30;
+  }
+  from {
+    opacity: 1;
+    height: 30px;
+  }
+}
+
+
+@keyframes leave {
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+  80% {
+    opacity: .25;
+  }
+  60% {
+    opacity: .10;
+    color: red;
+  }
+  40% {
+    opacity: .5;
+  }
+  20% {
+    opacity: .30;
+  }
+  from {
+    opacity: 1;
+    height: 30px;
+  }
 }
