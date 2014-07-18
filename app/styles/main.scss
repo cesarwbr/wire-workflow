@@ -67,6 +67,8 @@ body {
 .add {
   @extend .glyphicon;
   @extend .glyphicon-plus-sign;
+  color: green;
+  cursor: pointer;
 }
 
 .remove-icon {
@@ -114,7 +116,6 @@ body {
     }
     > .add {
       font-size: 0.9em;
-      color: green;
     }
   }
   .section-content {

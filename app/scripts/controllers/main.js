@@ -80,6 +80,13 @@ angular.module('wireWorkflowApp')
       items: []
     }];
 
+    $scope.addMetaAttribute = function(step) {
+      step.metaAttributes.push({
+        name: '',
+        value: ''
+      });
+    };
+
     $scope.showHide = function(sectionName, type) {
 
       for (var section in $scope.sections) {
@@ -115,7 +122,8 @@ angular.module('wireWorkflowApp')
         id: 1,
         name: 'Step ' + ($scope.workflow.steps.length + 1),
         show: false,
-        actions: []
+        actions: [],
+        metaAttributes: []
       };
       $scope.workflow.steps.push($scope.workflow.currentStep);
       $scope.workflow.template.url = 'views/step-details.html';
@@ -128,7 +136,7 @@ angular.module('wireWorkflowApp')
       $scope.workflow.currentAction = {
         name: 'Action ' + ($scope.workflow.initialActions.length + 1),
         actionItems: actionItems,
-        show: true
+        show: false
       };
 
       $scope.workflow.initialActions.push($scope.workflow.currentAction);
@@ -170,22 +178,26 @@ angular.module('wireWorkflowApp')
         id: 1,
         name: 'Step ' + 1,
         show: false,
-        actions: []
+        actions: [],
+        metaAttributes: []
       }, {
         id: 2,
         name: 'Step ' + 2,
         show: false,
-        actions: []
+        actions: [],
+        metaAttributes: []
       }, {
         id: 3,
         name: 'Step ' + 3,
         show: false,
-        actions: []
+        actions: [],
+        metaAttributes: []
       }, {
         id: 4,
         name: 'Step ' + 4,
         show: false,
-        actions: []
+        actions: [],
+        metaAttributes: []
       }]
     };
 
