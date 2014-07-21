@@ -136,7 +136,11 @@ angular.module('wireWorkflowApp')
       $scope.workflow.currentAction = {
         name: 'Action ' + ($scope.workflow.initialActions.length + 1),
         actionItems: actionItems,
-        show: false
+        show: false,
+        finish: false,
+        screen: {
+          plugin: ''
+        }
       };
 
       $scope.workflow.initialActions.push($scope.workflow.currentAction);
@@ -304,11 +308,7 @@ angular.module('wireWorkflowApp')
   .directive('initialActions', function() {
     return {
       restriction: 'A',
-      templateUrl: '/views/initial-actions.html',
-      link: function(scope, element) {
-        // Sort action items
-        //$(element.children()[0]).sortable();
-      }
+      templateUrl: '/views/initial-actions.html'
     };
   })
   .directive('action', function() {
@@ -422,15 +422,18 @@ angular.module('wireWorkflowApp')
         scope.addAction = function(step) {
           scope.workflow.currentAction = {
             name: 'Action ' + (step.actions.length + 1),
-            actionItems: actionItems
+            actionItems: actionItems,
+            finish: true,
+            screen: {
+              plugin: '',
+              screenUrl: ''
+            }
           };
 
           step.actions.push(scope.workflow.currentAction);
           step.show = true;
           scope.workflow.template.url = 'views/action-details.html';
         };
-
-
 
         scope.showStep = function(step) {
           scope.workflow.currentStep = step;
