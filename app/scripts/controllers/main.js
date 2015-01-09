@@ -440,6 +440,10 @@ angular.module('wireWorkflowApp')
           scope.workflow.template.url = 'views/step-details.html';
         };
 
+        scope.showConnections = function(step) {
+          element.children().first().popover('show');
+        };
+
         scope.removeStep = function(step) {
           var index = scope.workflow.steps.indexOf(step);
           if (index >= 0) {

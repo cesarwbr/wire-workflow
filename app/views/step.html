@@ -1,9 +1,9 @@
-<div class="workflow-item" step-id="{{step.id}}">
+<div class="workflow-item" step-id="{{step.id}}" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   <div class="step" ng-click="step.show = !step.show">{{step.name}}
     <a class="glyphicon glyphicon-chevron-down"></a>
   </div>
   <div class="features">
-    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showStep(step)"></a>
+    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showConnections(step)"></a>
     <a class="add glyphicon glyphicon-plus-sign" ng-click="addAction(step, currentAction, template)" alt="Adicionar Action" title="Adicionar Action" ></a>
     <a class="remove-icon" alt="Remover Step" title="Remover Step" ng-click="removeStep(step)"></a>
   </div>
