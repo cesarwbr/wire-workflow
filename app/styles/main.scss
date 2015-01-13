@@ -29,6 +29,10 @@ body {
   display: block;
 }
 
+.hide {
+  display: none;
+}
+
 .arrow-left {
   width: 0;
   height: 0;
@@ -168,7 +172,7 @@ body {
   .actions {
     display: none;
     li {
-      width: 261px;
+      width: 276px;
     }
     .sub-item {
       @extend .step;
@@ -200,11 +204,12 @@ body {
     -moz-border-radius-bottomright: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    float: right;
+    float: left;
     // background-image: url(../images/list.png);
     background-position: left 5px top 8px;
     height: 34px;
     padding: 9px 5px 0 5px;
+    margin-left: 1px;
     .add {
       color: green;
     }
