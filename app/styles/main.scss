@@ -15,7 +15,7 @@ $transiction_color: #bbbbbb;
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background: #eee;
+  background: #fff;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -282,6 +282,45 @@ h3 {
   position: relative;
 }
 
+/*******************************
+  ATRIBUTES
+ *******************************/
+.attributes {
+  width: 295px;
+  th:first-child {
+    width: 140px;
+  }
+
+  th > input {
+    width: 130px;
+  }
+
+  th > a {
+    cursor: pointer;
+  }
+}
+
+/*******************************
+  SHOW STEP
+ *******************************/
+.show-step {
+  padding-left: 10px;
+  border-left: 3px solid #31A8E4;
+
+  label {
+    color: #A5B2B4;
+    font-weight: normal;
+  }
+
+  &.show-action {
+    border-left-color: #FFC107;
+  }
+
+  &.show-next-step {
+    border-left-color: #4CAF50;
+  }
+}
+
 @-webkit-keyframes enter {
   from {
     opacity: 0;
@@ -387,3 +426,5 @@ h3 {
     height: 30px;
   }
 }
+
+

@@ -3,7 +3,7 @@
     <a class="glyphicon glyphicon-chevron-down"></a>
   </div>
   <div class="features">
-    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showConnections(step)"></a>
+    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showStep(step)"></a>
     <a class="add glyphicon glyphicon-plus-sign" ng-click="addAction(step, currentAction, template)" alt="Adicionar Action" title="Adicionar Action" ></a>
     <a class="remove-icon" alt="Remover Step" title="Remover Step" ng-click="removeStep(step)"></a>
   </div>
@@ -11,6 +11,6 @@
 <!-- <div class="transition-link"><div>Cancelado</div></div> -->
 <ul class="actions" ng-class="{show: step.show}">
   <li ng-repeat="action in step.actions">
-    <div action="action" workflow="workflow" actionarray="step.actions"></div>
+    <div action="action" workflow="workflow" actionarray="step.actions" step="step"></div>
   </li>
 </ul>
