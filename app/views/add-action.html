@@ -1,0 +1,30 @@
+<div class="modal fade" id="addActionItem" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalLabel">Add Action Item</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Type</label>
+          <select class="form-control" ng-model="newItem.type">
+            <option value="pre-function">Pre-Function</option>
+            <option value="post-function">Post-Function</option>
+            <option value="validator">Validator</option>
+            <option value="condition">Condition</option>
+            <option value="conditionresult">Condition Result</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Name</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Name" ng-model="newItem.name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="addItem(newItem, action)">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<h3>Result Details</h3>
+
+<div class="form-group show-step" ng-show="workflow.currentStep.name">
+  <label>From Step</label>
+  <div>{{workflow.currentStep.name}}</div>
+</div>
+<div class="form-group show-step show-action">
+  <label>Action</label>
+  <div>{{workflow.currentAction.name}}</div>
+</div>
+<div class="form-group show-step show-next-step">
+  <label for="step">To Step</label>
+  <select ng-model="workflow.currentItem.step" ng-options="step.id as step.name for step in workflow.steps" ng-change="addTransition(workflow.currentStep)" class="form-control">
+    <option value="">Select an step</option>
+  </select>
+</div>
