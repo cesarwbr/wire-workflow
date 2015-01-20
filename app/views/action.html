@@ -11,13 +11,14 @@
 </div>
 
 <ul class="actions-items" ng-class="{show: action.show}">
-    <li ng-repeat="actionItem in action.actionItems" ng-class="{hide: actionItem.items.length == 0}">
+    <li ng-repeat="actionItem in action.actionItems" ng-class="{hide: actionItem.items.length == 0 && !actionItem.hasConfig}">
         <div>
             <div class="workflow-item">
                 <div class="sub-item" ng-click="actionItem.show = !actionItem.show">{{actionItem.name}}
                     <a class="glyphicon glyphicon-chevron-down"></a>
                 </div>
                 <div class="features">
+                    <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showActionItem(actionItem, action)" ng-show="actionItem.hasConfig"></a>
                     <a class="add glyphicon glyphicon-plus-sign" alt="Adicionar Item" title="Adicionar Item" ng-click="addItem(actionItem, action)" ng-hide="actionItem.noAdd"></a>
                 </div>
             </div>
@@ -25,7 +26,8 @@
                 <li ng-repeat="item in actionItem.items">
                     <div>
                         <div class="workflow-item">
-                            <div class="leaf">{{item.name}}
+                            <div class="leaf" ng-click="item.show = !item.show">{{item.name}}
+                                <a class="glyphicon glyphicon-chevron-down"></a>
                             </div>
                             <div class="features">
                                 <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showItem(item, action)"></a>
@@ -33,6 +35,20 @@
                             </div>
                         </div>
                     </div>
+                    <ul class="items" ng-class="{show: item.show}">
+                        <li ng-repeat="subitem in item.items">
+                            <div>
+                                <div class="workflow-item">
+                                    <div class="leaf">{{subitem.name}}
+                                    </div>
+                                    <div class="features">
+                                        <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showItem(item, action)"></a>
+                                        <a class="remove-icon" alt="Remover Item" title="Remover Item" ng-click="removeItem(item, actionItem.items)" ng-hide="item.notRemovable"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

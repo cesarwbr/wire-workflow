@@ -64,6 +64,20 @@ angular.module('wireWorkflowApp')
       }
     };
 
+    var resultItems = [{
+      name: 'Pre-Functions',
+      type: 'pre-function',
+      items: []
+    }, {
+      name: 'Post-Functions',
+      type: 'post-function',
+      items: []
+    }, {
+      name: 'Validators',
+      type: 'validator',
+      items: []
+    }];
+
     var actionItems = [{
       name: 'Pre-Functions',
       type: 'pre-function',
@@ -83,13 +97,24 @@ angular.module('wireWorkflowApp')
     }, {
       name: 'Result',
       type: 'result',
+      noAdd: false,
+      hasConfig: true,
       items: [{
-        name: 'Restult',
-        type: 'result',
-        notRemovable: true,
-        step: ''
-      }],
-      noAdd: true
+        name: 'Pre-Functions',
+        type: 'pre-function',
+        items: [],
+        notRemovable: true
+      }, {
+        name: 'Post-Functions',
+        type: 'post-function',
+        items: [],
+        notRemovable: true
+      }, {
+        name: 'Validators',
+        type: 'validator',
+        items: [],
+        notRemovable: true
+      }]
     }, {
       name: 'Codition Results',
       type: 'condition-result',
@@ -199,12 +224,24 @@ angular.module('wireWorkflowApp')
         }, {
           name: 'Result',
           type: 'result',
+          noAdd: false,
+          hasConfig: true,
           items: [{
-            name: 'Restult',
-            type: 'result',
+            name: 'Pre-Functions',
+            type: 'pre-function',
+            items: [],
             notRemovable: true
-          }],
-          noAdd: true
+          }, {
+            name: 'Post-Functions',
+            type: 'post-function',
+            items: [],
+            notRemovable: true
+          }, {
+            name: 'Validators',
+            type: 'validator',
+            items: [],
+            notRemovable: true
+          }]
         }, {
           name: 'Codition Results',
           type: 'condition-result',
@@ -304,13 +341,7 @@ angular.module('wireWorkflowApp')
             scope.workflow.template.url = 'views/details/codition-details.html';
           }
           if (item.type === 'result') {
-            scope.workflow.currentItem = {
-              step: step,
-              name: item.name + ' ' + (item.items.length + 1),
-              type: item.type
-            };
-            item.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/result-details.html';
+            angular.element('#addActionItem').modal('show');
           } else {
 
             scope.workflow.currentItem = {
@@ -324,6 +355,38 @@ angular.module('wireWorkflowApp')
           item.show = true;
           addSortableToAll();
           closeAddActionModal();
+        };
+      }
+    };
+  }])
+  .directive('addResultItem', [function() {
+    return {
+      restrict: 'A',
+      templateUrl: '/views/add-result-item.html',
+      link: function(scope) {
+        var closeAddResultItemModal = function() {
+          angular.element('#addResultItem').modal('hide');
+          scope.newItem = {
+            items: []
+          };
+        };
+
+        scope.addResultItem = function(item, step) {
+          var currentItem = scope.workflow.currentActionItem.items.filter(function(obj) {
+            return obj.type === item.type;
+          });
+          currentItem = currentItem[0];
+          scope.workflow.currentItem = {
+            step: step,
+            name: item.name,
+            type: item.type
+          };
+          currentItem.items.push(scope.workflow.currentItem);
+          scope.workflow.template.url = 'views/details/item-details.html';
+
+          item.show = true;
+          addSortableToAll();
+          closeAddResultItemModal();
         };
       }
     };
@@ -461,6 +524,13 @@ angular.module('wireWorkflowApp')
           }
         };
 
+        scope.showActionItem = function(actionItem, action) {
+          scope.workflow.currentStep = scope.step;
+          scope.workflow.currentAction = action;
+          scope.workflow.currentActionItem = actionItem;
+          scope.workflow.template.url = 'views/details/result-details.html';
+        };
+
         scope.showItem = function(item, action) {
           scope.workflow.currentStep = scope.step;
           scope.workflow.currentAction = action;
@@ -494,6 +564,7 @@ angular.module('wireWorkflowApp')
           });
 
           currentActionItem = currentActionItem[0];
+          scope.workflow.currentActionItem = currentActionItem;
           if (item.type === 'codition') {
             scope.workflow.currentItem = {
               name: item.name + ' ' + (item.items.length + 1),
@@ -507,12 +578,7 @@ angular.module('wireWorkflowApp')
             scope.workflow.template.url = 'views/details/codition-details.html';
           }
           if (item.type === 'result') {
-            scope.workflow.currentItem = {
-              name: item.name + ' ' + (item.items.length + 1),
-              type: item.type
-            };
-            currentActionItem.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/result-details.html';
+            angular.element('#addResultItem').modal('show');
           } else {
             scope.workflow.currentItem = {
               name: item.name,
@@ -556,12 +622,24 @@ angular.module('wireWorkflowApp')
         }, {
           name: 'Result',
           type: 'result',
+          hasConfig: true,
+          noAdd: false,
           items: [{
-            name: 'Restult',
-            type: 'result',
+            name: 'Pre-Functions',
+            type: 'pre-function',
+            items: [],
             notRemovable: true
-          }],
-          noAdd: true
+          }, {
+            name: 'Post-Functions',
+            type: 'post-function',
+            items: [],
+            notRemovable: true
+          }, {
+            name: 'Validators',
+            type: 'validator',
+            items: [],
+            notRemovable: true
+          }]
         }, {
           name: 'Codition Results',
           type: 'condition-result',
@@ -606,6 +684,11 @@ angular.module('wireWorkflowApp')
           scope.workflow.template.url = 'views/details/action-details.html';
         };
 
+        scope.showActionItem = function(actionItem) {
+          scope.workflow.currentActionItem = actionItem;
+          scope.workflow.template.url = 'views/details/result-details.html';
+        };
+
         scope.showItem = function(item) {
           scope.workflow.currentItem = item;
           if (item.type === 'codition') {
@@ -616,6 +699,7 @@ angular.module('wireWorkflowApp')
             scope.workflow.template.url = 'views/details/item-details.html';
           }
         };
+
 
         scope.addItem = function(item, step) {
           var currentActionItem = scope.workflow.currentAction.actionItems.filter(function(obj) {
