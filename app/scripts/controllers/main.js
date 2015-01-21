@@ -56,6 +56,9 @@ angular.module('wireWorkflowApp')
       initialActions: {
         show: false
       },
+      globalActions: {
+        show: false
+      },
       splits: {
         show: false
       },
@@ -196,6 +199,23 @@ angular.module('wireWorkflowApp')
       addSortableToAll();
     };
 
+    $scope.addGlobalAction = function() {
+      $scope.workflow.currentAction = {
+        name: 'Action ' + ($scope.workflow.globalActions.length + 1),
+        actionItems: actionItems,
+        show: false,
+        finish: false,
+        screen: {
+          plugin: ''
+        }
+      };
+
+      $scope.workflow.globalActions.push($scope.workflow.currentAction);
+      $scope.workflow.template.url = 'views/details/action-details.html';
+      $scope.showHide('globalActions', 'show');
+      addSortableToAll();
+    };
+
     $scope.showWorkflow = function() {
       $scope.workflow.template.url = 'views/details/workflow-details.html';
     };
@@ -254,6 +274,7 @@ angular.module('wireWorkflowApp')
           plugin: ''
         }
       }],
+      globalActions: [],
       currentAction: {},
       currentStep: {},
       currentItem: {},
@@ -492,6 +513,12 @@ angular.module('wireWorkflowApp')
       templateUrl: '/views/initial-actions.html'
     };
   })
+  .directive('globalActions', function() {
+    return {
+      restriction: 'A',
+      templateUrl: '/views/global-actions.html'
+    };
+  })
   .directive('action', function() {
     return {
       restriction: 'A',
@@ -510,6 +537,26 @@ angular.module('wireWorkflowApp')
         scope.addActionItem = function(action) {
           scope.workflow.currentAction = action;
           angular.element('#addActionItem').modal('show');
+        };
+
+        scope.showSubItems = function(item) {
+          if (item.items && item.items.length > 0) {
+            return true;
+          }
+
+          if (item.items === undefined) {
+            return true;
+          }
+
+          return false;
+        };
+
+        scope.hasSubItems = function(item) {
+          if (item.items && item.items.length > 0) {
+            return true;
+          }
+
+          return false;
         };
 
         scope.showAction = function(action) {

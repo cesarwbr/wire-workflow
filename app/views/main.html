@@ -4,20 +4,26 @@
   </h3>
   <div>
     <div class="workflow">
+      <!-- Initial Action -->
       <div class="section-title">
         <a class="up-down" ng-class="{down: !sections.initialActions.show, up: sections.initialActions.show}" ng-click="showHide('initialActions')"></a>  <span ng-click="showHide('initialActions')">Initial Actions</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ng-click="addInitialAction()"></a>
       </div>
       <div initial-actions ng-show="sections.initialActions.show" class="section-content"></div>
+      <!-- Global Action -->
+      <div class="section-title">
+        <a class="up-down" ng-class="{down: !sections.globalActions.show, up: sections.globalActions.show}" ng-click="showHide('globalActions')"></a>  <span ng-click="showHide('globalActions')">Global Actions</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ng-click="addGlobalAction()"></a>
+      </div>
+      <div global-actions ng-show="sections.globalActions.show" class="section-content"></div>
+      <!-- Steps -->
       <div class="section-title">
         <a class="up-down" ng-class="{down: !sections.steps.show, up: sections.steps.show}" ng-click="showHide('steps')"></a> <span ng-click="showHide('steps')">Steps</span> <a class="add" alt="Adicionar Action" title="Adicionar Steps" ng-click="addStep()"></a>
       </div>
       <div steps ng-show="sections.steps.show" class="section-content"></div>
-      <!--<div>
-        <div workflow-transiction></div>
-      </div> -->
+      <!-- Splits -->
       <div class="section-title">
         <a class="up-down" ng-class="{down: !sections.splits.show, up: sections.splits.show}" ng-click="showHide('splits')"></a> <span ng-click="showHide('splits')">Splits</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ></a>
       </div>
+      <!-- Joins -->
       <div class="section-title">
         <a class="up-down" ng-class="{down: !sections.joins.show, up: sections.joins.show}" ng-click="showHide('joins')"></a> <span ng-click="showHide('joins')">Joins</span> <a class="add" alt="Adicionar Action" title="Adicionar Action" ></a>
       </div>

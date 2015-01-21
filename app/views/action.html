@@ -23,14 +23,14 @@
                 </div>
             </div>
             <ul class="items" ng-class="{show: actionItem.show}">
-                <li ng-repeat="item in actionItem.items">
+                <li ng-repeat="item in actionItem.items" ng-show="showSubItems(item)">
                     <div>
                         <div class="workflow-item">
-                            <div class="leaf" ng-click="item.show = !item.show">{{item.name}}
-                                <a class="glyphicon glyphicon-chevron-down"></a>
+                            <div ng-class="{'sub-item': hasSubItems(item), 'leaf': !hasSubItems(item)}" ng-click="item.show = !item.show">{{item.name}}
+                                <a class="glyphicon glyphicon-chevron-down" ng-show="hasSubItems(item)"></a>
                             </div>
                             <div class="features">
-                                <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showItem(item, action)"></a>
+                                <a class="glyphicon glyphicon-th-list" alt="Configuração" title="Configuração" ng-click="showItem(item, action)" ng-hide="hasSubItems(item)"></a>
                                 <a class="remove-icon" alt="Remover Item" title="Remover Item" ng-click="removeItem(item, actionItem.items)" ng-hide="item.notRemovable"></a>
                             </div>
                         </div>
