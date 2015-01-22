@@ -42,12 +42,10 @@ var addSortableToAll = function() {
 angular.module('wireWorkflowApp')
   .controller('MainCtrl', function($scope) {
 
-    $scope.typeChosed = '';
     $scope.filteredScreenList = [];
     $scope.choseType = function() {
-      console.log('selectedItem: ' + $scope.workflow.selectedItem);
-      $scope.filteredScreenList = $scope.screenList.filter(function(element) {
-        return element.name === $scope.workflow.selectedItem;
+      $scope.workflow.currentAction.filteredScreenList = $scope.screenList.filter(function(element) {
+        return element.name === $scope.workflow.currentAction.selectedScreenName;
       });
 
     };
