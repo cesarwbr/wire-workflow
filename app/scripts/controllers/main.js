@@ -41,11 +41,158 @@ var addSortableToAll = function() {
 
 angular.module('wireWorkflowApp')
   .controller('MainCtrl', function($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+    $scope.typeChosed = '';
+    $scope.filteredScreenList = [];
+    $scope.choseType = function() {
+      console.log('selectedItem: ' + $scope.workflow.selectedItem);
+      $scope.filteredScreenList = $scope.screenList.filter(function(element) {
+        return element.name === $scope.workflow.selectedItem;
+      });
+
+    };
+
+    $scope.screenList = [{
+      id: 21,
+      name: 'Fechar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/screens/close',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 43,
+      name: 'Retorno ao Clente',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/screens/recurrence',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 22,
+      name: 'screen de ocorrência',
+      description: 'tela para transição de ocorrência',
+      url: '/service-request/screens/occurrence',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 583,
+      name: 'Encaminhar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/mobile-technical-complaint/screens/forward',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 721,
+      name: 'Acertar Cadastro',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/postpaid-contestation-complaint/screens/hit-record',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 1,
+      name: 'Cancelar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/screens/cancel',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 441,
+      name: 'Fechar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/customer-service-complaint/screens/close',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 461,
+      name: 'Resolver',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/wrong-sale-complaint/screens/resolve',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 562,
+      name: 'Resolver',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/undue-blocking-complaint/screens/resolve',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 601,
+      name: 'Encaminhar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/postpaid-contestation-complaint/screens/forward',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 701,
+      name: 'Devolver em Dobro',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/postpaid-contestation-complaint/screens/double-return',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 882,
+      name: 'Fechar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/screens/positiveflag',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 923,
+      name: 'Retorno ao Clente',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/cancel-complaint/screens/forward',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 481,
+      name: 'Encaminhar 2 nivel',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/recharge-failure-complaint/screens/forward',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 521,
+      name: 'Fechar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/csp12-technical-complaint/screens/close',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 771,
+      name: 'Encaminhar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/repayment-request/screens/repayment',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 772,
+      name: 'Ajustar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/repayment-request/screens/adjustment',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 803,
+      name: 'Retorno ao Clente',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/wrong-sale-complaint-2/screens/resolve',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 804,
+      name: 'Encaminhar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/wrong-sale-complaint-2/screens/forward',
+      screenTypeId: 1,
+      pluginId: 1
+    }, {
+      id: 641,
+      name: 'Apurar',
+      description: 'Solicitação de Serviço',
+      url: '/service-request/postpaid-contestation-complaint/screens/repayment',
+      screenTypeId: 1,
+      pluginId: 1
+    }];
 
     $scope.stepName = '';
 
@@ -66,20 +213,6 @@ angular.module('wireWorkflowApp')
         show: false
       }
     };
-
-    var resultItems = [{
-      name: 'Pre-Functions',
-      type: 'pre-function',
-      items: []
-    }, {
-      name: 'Post-Functions',
-      type: 'post-function',
-      items: []
-    }, {
-      name: 'Validators',
-      type: 'validator',
-      items: []
-    }];
 
     var actionItems = [{
       name: 'Pre-Functions',
@@ -330,6 +463,45 @@ angular.module('wireWorkflowApp')
     // $scope.$watch('workflow.steps', function() {
     //   console.log(angular.element('.workflow-item')[0]);
     // });
+  })
+  .filter('unique', function() {
+
+    return function(items, filterOn) {
+
+      if (filterOn === false) {
+        return items;
+      }
+
+      if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
+        var hashCheck = {},
+          newItems = [];
+
+        var extractValueToCompare = function(item) {
+          if (angular.isObject(item) && angular.isString(filterOn)) {
+            return item[filterOn];
+          } else {
+            return item;
+          }
+        };
+
+        angular.forEach(items, function(item) {
+          var valueToCheck, isDuplicate = false;
+
+          for (var i = 0; i < newItems.length; i++) {
+            if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
+              isDuplicate = true;
+              break;
+            }
+          }
+          if (!isDuplicate) {
+            newItems.push(item);
+          }
+
+        });
+        items = newItems;
+      }
+      return items;
+    };
   })
   .directive('addAction', [function() {
     return {
@@ -582,12 +754,19 @@ angular.module('wireWorkflowApp')
           scope.workflow.currentStep = scope.step;
           scope.workflow.currentAction = action;
           scope.workflow.currentItem = item;
-          if (item.type === 'codition') {
-            scope.workflow.template.url = 'views/details/codition-details.html';
-          } else if (item.type === 'result') {
-            scope.workflow.template.url = 'views/details/result-details.html';
-          } else {
-            scope.workflow.template.url = 'views/details/item-details.html';
+
+          switch (item.type) {
+            case 'pre-function':
+              scope.workflow.template.url = 'views/details/function-details.html';
+              break;
+            case 'condition':
+              scope.workflow.template.url = 'views/details/codition-details.html';
+              break;
+            case 'result':
+              scope.workflow.template.url = 'views/details/result-details.html';
+              break;
+            default:
+              scope.workflow.template.url = 'views/details/item-details.html';
           }
         };
 
@@ -715,7 +894,7 @@ angular.module('wireWorkflowApp')
           scope.workflow.template.url = 'views/details/step-details.html';
         };
 
-        scope.showConnections = function(step) {
+        scope.showConnections = function() {
           element.children().first().popover('show');
         };
 
@@ -738,12 +917,18 @@ angular.module('wireWorkflowApp')
 
         scope.showItem = function(item) {
           scope.workflow.currentItem = item;
-          if (item.type === 'codition') {
-            scope.workflow.template.url = 'views/details/codition-details.html';
-          } else if (item.type === 'result') {
-            scope.workflow.template.url = 'views/details/result-details.html';
-          } else {
-            scope.workflow.template.url = 'views/details/item-details.html';
+          switch (item.type) {
+            case 'pre-function':
+              scope.workflow.template.url = 'views/details/function-details.html';
+              break;
+            case 'condition':
+              scope.workflow.template.url = 'views/details/codition-details.html';
+              break;
+            case 'result':
+              scope.workflow.template.url = 'views/details/result-details.html';
+              break;
+            default:
+              scope.workflow.template.url = 'views/details/item-details.html';
           }
         };
 
