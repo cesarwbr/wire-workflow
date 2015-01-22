@@ -255,16 +255,16 @@ angular.module('wireWorkflowApp')
       items: []
     }];
 
-    $scope.addMetaAttribute = function(step) {
-      step.metaAttributes.push({
+    $scope.addMetaAttribute = function(elem) {
+      elem.metaAttributes.push({
         name: '',
         value: ''
       });
     };
 
-    $scope.removeMetaAttribute = function(step, attribute) {
-      var index = step.metaAttributes.indexOf(attribute);
-      step.metaAttributes.splice(index, 1);
+    $scope.removeMetaAttribute = function(elem, attribute) {
+      var index = elem.metaAttributes.indexOf(attribute);
+      elem.metaAttributes.splice(index, 1);
     };
 
     $scope.showHide = function(sectionName, type) {
@@ -471,8 +471,7 @@ angular.module('wireWorkflowApp')
       }
 
       if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
-        var hashCheck = {},
-          newItems = [];
+        var newItems = [];
 
         var extractValueToCompare = function(item) {
           if (angular.isObject(item) && angular.isString(filterOn)) {
@@ -483,7 +482,7 @@ angular.module('wireWorkflowApp')
         };
 
         angular.forEach(items, function(item) {
-          var valueToCheck, isDuplicate = false;
+          var isDuplicate = false;
 
           for (var i = 0; i < newItems.length; i++) {
             if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
@@ -518,31 +517,57 @@ angular.module('wireWorkflowApp')
             return obj.type === item.type;
           });
           currentActionItem = currentActionItem[0];
-          if (item.type === 'codition') {
-            scope.workflow.currentItem = {
-              step: step,
-              name: item.name + ' ' + (item.items.length + 1),
-              type: item.type,
-              restriction: {
-                type: '',
-                conditions: []
-              }
-            };
-            item.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/codition-details.html';
-          }
-          if (item.type === 'result') {
-            angular.element('#addActionItem').modal('show');
-          } else {
 
-            scope.workflow.currentItem = {
-              step: step,
-              name: item.name,
-              type: item.type
-            };
-            currentActionItem.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/item-details.html';
+          switch (item.type) {
+            case 'post-function':
+            case 'pre-function':
+              scope.workflow.currentItem = {
+                step: step,
+                name: item.name,
+                metaAttributes: [],
+                type: item.type
+              };
+
+              currentActionItem.items.push(scope.workflow.currentItem);
+              scope.workflow.template.url = 'views/details/function-details.html';
+              break;
+            case 'validator':
+              scope.workflow.currentItem = {
+                step: step,
+                name: item.name,
+                metaAttributes: [],
+                type: item.type
+              };
+
+              currentActionItem.items.push(scope.workflow.currentItem);
+              scope.workflow.template.url = 'views/details/validator-details.html';
+              break;
+            case 'condition':
+              scope.workflow.currentItem = {
+                step: step,
+                name: item.name + ' ' + (item.items.length + 1),
+                type: item.type,
+                restriction: {
+                  type: '',
+                  conditions: []
+                }
+              };
+              item.items.push(scope.workflow.currentItem);
+              scope.workflow.template.url = 'views/details/codition-details.html';
+              break;
+            case 'result':
+              angular.element('#addActionItem').modal('show');
+              break;
+            default:
+              scope.workflow.currentItem = {
+                step: step,
+                name: item.name,
+                type: item.type
+              };
+              currentActionItem.items.push(scope.workflow.currentItem);
+              scope.workflow.template.url = 'views/details/item-details.html';
           }
+
           item.show = true;
           addSortableToAll();
           closeAddActionModal();
@@ -754,8 +779,12 @@ angular.module('wireWorkflowApp')
           scope.workflow.currentItem = item;
 
           switch (item.type) {
+            case 'post-function':
             case 'pre-function':
               scope.workflow.template.url = 'views/details/function-details.html';
+              break;
+            case 'validator':
+              scope.workflow.template.url = 'views/details/validator-details.html';
               break;
             case 'condition':
               scope.workflow.template.url = 'views/details/codition-details.html';
