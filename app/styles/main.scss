@@ -19,11 +19,11 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+/*@media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
   }
-}
+}*/
 
 .show {
   display: block;
@@ -427,4 +427,90 @@ h3 {
   }
 }
 
+/***************************
+  CONDITION
+ ***************************/
 
+.clause {
+  .title {
+    width: 55px;
+    height: 35px;
+    border: 0;
+    z-index: 100;
+    /* Internet Explorer 10 */
+    display:-ms-flexbox;
+    -ms-flex-pack:center;
+    -ms-flex-align:center;
+
+    /* Firefox */
+    display:-moz-inline-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari, Opera, and Chrome */
+    display:-webkit-inline-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:inline-box;
+    box-pack:center;
+    box-align:center;
+
+    background-color: #F5F5F5;
+    color: #797979;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    border-radius: 2px;
+    border-left: 3px solid #4CAF50;
+    margin-right: 5px;
+  }
+
+  .clause-type {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #fff;
+    background: none;
+    border: 0;
+    background-color: #00bcd4;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+    height: 20px;
+    width: 40px;
+    cursor: pointer;
+  }
+
+  .clause-container {
+    width: 200px;
+    border-left: 2px solid #DCDCDC;
+    margin-left: 25px;
+  }
+
+  .title-and {
+  	border-left: 3px solid #F44336;
+  }
+
+  .title-or {
+  	border-left: 3px solid #FFC107;
+  }
+
+  .subclause {
+    padding-top: 10px;
+    padding-left: 10px;
+    position: relative;
+
+    .clause-sep {
+      left: 0;
+      position: absolute;
+      border-top: 2px solid #DCDCDC;
+      width: 10px;
+      height: 2px;
+      top: 30px;
+    }
+  }
+}
+
+.popover {
+  max-width: 500px;
+}

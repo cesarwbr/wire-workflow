@@ -41,6 +41,34 @@ var addSortableToAll = function() {
 
 angular.module('wireWorkflowApp')
   .controller('MainCtrl', function($scope) {
+    $scope.addAndClause = function(clause) {
+      clause.clauses.push({
+        type: 'AND',
+        clauses: []
+      });
+    };
+
+    $scope.addOrClause = function(clause) {
+      clause.clauses.push({
+        type: 'OR',
+        clauses: []
+      });
+    };
+
+    $scope.clause = {
+      clauses: []
+    };
+
+    $scope.openArguments = function() {
+      console.log('foo');
+      angular.element('.title').popover({
+        html: true,
+        placement: 'bottom',
+        content: function() {
+          return angular.element('.popover').html();
+        },
+      })
+    };
 
     $scope.filteredScreenList = [];
     $scope.choseType = function() {
@@ -226,7 +254,7 @@ angular.module('wireWorkflowApp')
       items: []
     }, {
       name: 'Conditions',
-      type: 'codition',
+      type: 'condition',
       items: []
     }, {
       name: 'Result',
@@ -250,7 +278,7 @@ angular.module('wireWorkflowApp')
         notRemovable: true
       }]
     }, {
-      name: 'Codition Results',
+      name: 'Condition Results',
       type: 'condition-result',
       items: []
     }];
@@ -370,7 +398,7 @@ angular.module('wireWorkflowApp')
           items: []
         }, {
           name: 'Conditions',
-          type: 'codition',
+          type: 'condition',
           items: []
         }, {
           name: 'Result',
@@ -394,7 +422,7 @@ angular.module('wireWorkflowApp')
             notRemovable: true
           }]
         }, {
-          name: 'Codition Results',
+          name: 'Condition Results',
           type: 'condition-result',
           items: []
         }],
@@ -410,7 +438,8 @@ angular.module('wireWorkflowApp')
       currentStep: {},
       currentItem: {},
       template: {
-        url: 'views/details/workflow-details.html'
+        //url: 'views/details/workflow-details.html'
+        url: 'views/details/condition-details.html'
       },
       restriction: {
         type: 'and',
@@ -545,15 +574,15 @@ angular.module('wireWorkflowApp')
             case 'condition':
               scope.workflow.currentItem = {
                 step: step,
-                name: item.name + ' ' + (item.items.length + 1),
+                name: item.name,
                 type: item.type,
                 restriction: {
                   type: '',
                   conditions: []
                 }
               };
-              item.items.push(scope.workflow.currentItem);
-              scope.workflow.template.url = 'views/details/codition-details.html';
+              currentActionItem.items.push(scope.workflow.currentItem);
+              scope.workflow.template.url = 'views/details/condition-details.html';
               break;
             case 'result':
               angular.element('#addActionItem').modal('show');
@@ -671,7 +700,7 @@ angular.module('wireWorkflowApp')
         if (scope.restriction.type === '') {
           template = '<a ng-click="addExpression(restriction)">Expression</a> <a>And</a> <a>Or</a>';
         } else if (scope.restriction.type === 'expression') {
-          template = '<label>Codition</label><select><option>Codition 1</option><option>Codition 2</option><option>Codition 3</option></select><div>Link to modal</div>';
+          template = '<label>Condition</label><select><option>Condition 1</option><option>Condition 2</option><option>Condition 3</option></select><div>Link to modal</div>';
         } else {
           template = '<div ng-repeat="condition in restriction.conditions"><div>{{restriction.type}}</div><div workflow-restriction restriction="condition"></div></div>';
         }
@@ -686,7 +715,7 @@ angular.module('wireWorkflowApp')
           if (scope.restriction.type === '') {
             template = '<a ng-click="addExpression(restriction)">Expression</a> <a>And</a> <a>Or</a>';
           } else if (scope.restriction.type === 'expression') {
-            template = '<label>Codition</label><select><option>Codition 1</option><option>Codition 2</option><option>Codition 3</option></select><div>Link to modal</div>';
+            template = '<label>Condition</label><select><option>Condition 1</option><option>Condition 2</option><option>Condition 3</option></select><div>Link to modal</div>';
           } else {
             template = '<div ng-repeat="condition in restriction.conditions"><div>{{restriction.type}}</div><div workflow-restriction restriction="condition"></div></div>';
           }
@@ -714,6 +743,61 @@ angular.module('wireWorkflowApp')
       templateUrl: '/views/global-actions.html'
     };
   })
+  .directive('subclause', function(RecursionHelper) {
+    return {
+      restriction: 'A',
+      templateUrl: '/views/condition/subclause.html',
+      transclude: true,
+      compile: function(element) {
+        return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+          console.log(scope.clause);
+        });
+      }
+    };
+  })
+  .factory('RecursionHelper', ['$compile', function($compile) {
+    return {
+      /**
+       * Manually compiles the element, fixing the recursion loop.
+       * @param element
+       * @param [link] A post-link function, or an object with function(s) registered via pre and post properties.
+       * @returns An object containing the linking functions.
+       */
+      compile: function(element, link) {
+        // Normalize the link parameter
+        if (angular.isFunction(link)) {
+          link = {
+            post: link
+          };
+        }
+
+        // Break the recursion loop by removing the contents
+        var contents = element.contents().remove();
+        var compiledContents;
+        return {
+          pre: (link && link.pre) ? link.pre : null,
+          /**
+           * Compiles and re-adds the contents
+           */
+          post: function(scope, element) {
+            // Compile the contents
+            if (!compiledContents) {
+              compiledContents = $compile(contents);
+            }
+            // Re-add the compiled contents to the element
+            compiledContents(scope, function(clone) {
+              element.append(clone);
+            });
+
+            // Call the post-linking function, if any
+            if (link && link.post) {
+              link.post.apply(null, arguments);
+            }
+          }
+        };
+      }
+    };
+  }])
   .directive('action', function() {
     return {
       restriction: 'A',
@@ -787,7 +871,7 @@ angular.module('wireWorkflowApp')
               scope.workflow.template.url = 'views/details/validator-details.html';
               break;
             case 'condition':
-              scope.workflow.template.url = 'views/details/codition-details.html';
+              scope.workflow.template.url = 'views/details/condition-details.html';
               break;
             case 'result':
               scope.workflow.template.url = 'views/details/result-details.html';
@@ -818,7 +902,7 @@ angular.module('wireWorkflowApp')
 
           currentActionItem = currentActionItem[0];
           scope.workflow.currentActionItem = currentActionItem;
-          if (item.type === 'codition') {
+          if (item.type === 'condition') {
             scope.workflow.currentItem = {
               name: item.name + ' ' + (item.items.length + 1),
               type: item.type,
@@ -828,7 +912,7 @@ angular.module('wireWorkflowApp')
               }
             };
             currentActionItem.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/codition-details.html';
+            scope.workflow.template.url = 'views/details/condition-details.html';
           }
           if (item.type === 'result') {
             angular.element('#addResultItem').modal('show');
@@ -894,7 +978,7 @@ angular.module('wireWorkflowApp')
             notRemovable: true
           }]
         }, {
-          name: 'Codition Results',
+          name: 'Condition Results',
           type: 'condition-result',
           items: []
         }];
@@ -949,7 +1033,7 @@ angular.module('wireWorkflowApp')
               scope.workflow.template.url = 'views/details/function-details.html';
               break;
             case 'condition':
-              scope.workflow.template.url = 'views/details/codition-details.html';
+              scope.workflow.template.url = 'views/details/condition-details.html';
               break;
             case 'result':
               scope.workflow.template.url = 'views/details/result-details.html';
@@ -964,7 +1048,7 @@ angular.module('wireWorkflowApp')
           var currentActionItem = scope.workflow.currentAction.actionItems.filter(function(obj) {
             return obj.type === item.type;
           });
-          if (item.type === 'codition') {
+          if (item.type === 'condition') {
             scope.workflow.currentItem = {
               step: step,
               name: item.name + ' ' + (item.items.length + 1),
@@ -975,7 +1059,7 @@ angular.module('wireWorkflowApp')
               }
             };
             item.items.push(scope.workflow.currentItem);
-            scope.workflow.template.url = 'views/details/codition-details.html';
+            scope.workflow.template.url = 'views/details/condition-details.html';
           }
           if (item.type === 'result') {
             scope.workflow.currentItem = {
