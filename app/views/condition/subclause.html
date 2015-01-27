@@ -1,6 +1,6 @@
 <div class="subclause">
   <div class="clause-sep"></div>
-  <div class="title" ng-class="{'title-and': clause.type === 'AND', 'title-or': clause.type === 'OR'}">{{clause.type}}</div>
+  <div class="title" clauseid="{{clause.id}}" ng-class="{'title-and': clause.type === 'AND', 'title-or': clause.type === 'OR'}" ng-click="showClause(clause)">{{clause.type}}</div>
   <button class="clause-type" ng-click="addAndClause(clause)">AND</button>
   <button class="clause-type" ng-click="addOrClause(clause)">OR</button>
   <div class="clause-container">

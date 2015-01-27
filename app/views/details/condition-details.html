@@ -1,3 +1,5 @@
+<h3>Condition Details</h3>
+
 <div class="clause">
   <div class="title" ng-click="openArguments()" data-toggle="popover">Scope</div>
   <button class="clause-type" ng-click="addAndClause(clause)">AND</button>
@@ -6,59 +8,9 @@
     <div subclause ng-repeat="clause in clause.clauses"></div>
   </div>
 </div>
-<!-- <div class="clause">
-  <div class="title" ng-click="openArguments()" data-toggle="popover">Scope</div>
-  <button class="clause-type">AND</button>
-  <button class="clause-type">OR</button>
-  <div class="clause-container">
-    <div class="subclause">
-      <div class="clause-sep"></div>
-      <div class="title title-and">AND</div>
-      <button class="clause-type">AND</button>
-      <button class="clause-type">OR</button>
-    </div>
-    <div class="subclause">
-      <div class="clause-sep"></div>
-      <div class="title title-or">OR</div>
-      <button class="clause-type">AND</button>
-      <button class="clause-type">OR</button>
-      <div class="clause-container">
-        <div class="subclause">
-          <div class="clause-sep"></div>
-          <div class="title title-and">AND</div>
-          <button class="clause-type">AND</button>
-          <button class="clause-type">OR</button>
-        </div>
-        <div class="subclause">
-          <div class="clause-sep"></div>
-          <div class="title title-or">OR</div>
-          <button class="clause-type">AND</button>
-          <button class="clause-type">OR</button>
-        </div>
-        <div class="subclause">
-          <div class="clause-sep"></div>
-          <div class="title title-or">OR</div>
-          <button class="clause-type">AND</button>
-          <button class="clause-type">OR</button>
-        </div>
-        <div class="subclause">
-          <div class="clause-sep"></div>
-          <div class="title title-or">OR</div>
-          <button class="clause-type">AND</button>
-          <button class="clause-type">OR</button>
-        </div>
-      </div>
-    </div>
-    <div class="subclause">
-      <div class="clause-sep"></div>
-      <div class="title title-and">AND</div>
-      <button class="clause-type">AND</button>
-      <button class="clause-type">OR</button>
-    </div>
-  </div>
-</div> -->
 
 <div class="popover top">
+  <div ng-click="addClauseArgument()">Add</div>
 	<table class="attributes">
       <thead>
         <tr>
@@ -67,50 +19,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
-        </tr>
-        <tr>
-          <th><input type="text"> : </th>
-          <th> <input type="text"></th>
-          <th><a class="remove-icon" alt="Remover" title="Remover"></a></th>
+        <tr ng-repeat="argument in currentClause.arguments">
+          <th><input type="text" ng-model="argument.name"> : </th>
+          <th> <input type="text" ng-model="argumente.value"></th>
+          <th><a class="remove-icon" ng-click="removeClauseArgument(argument)" alt="Remover" title="Remover"></a></th>
         </tr>
       </tbody>
     </table>

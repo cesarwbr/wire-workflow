@@ -40,34 +40,67 @@ var addSortableToAll = function() {
 };
 
 angular.module('wireWorkflowApp')
-  .controller('MainCtrl', function($scope) {
+  .controller('MainCtrl', function($scope, $compile) {
+    $scope.addClauseArgument = function() {
+      $scope.currentClause.arguments.push({
+        name: '',
+        value: ''
+      });
+    };
+
+    $scope.removeClauseArgument = function(argument) {
+      var index = $scope.currentClause.arguments.indexOf(argument);
+      $scope.currentClause.arguments.splice(index, 1);
+    };
+
+    $scope.showClause = function(clause) {
+      $scope.currentClause = clause;
+      $scope.openArguments(clause.id);
+    };
+
     $scope.addAndClause = function(clause) {
       clause.clauses.push({
+        id: clause.clauses.length,
         type: 'AND',
-        clauses: []
+        clauses: [],
+        arguments: []
       });
     };
 
     $scope.addOrClause = function(clause) {
       clause.clauses.push({
+        id: clause.clauses.length,
         type: 'OR',
-        clauses: []
+        clauses: [],
+        arguments: []
       });
     };
 
     $scope.clause = {
-      clauses: []
+      clauses: [],
+      arguments: [{
+        name: 'test',
+        value: ''
+      }]
     };
 
-    $scope.openArguments = function() {
-      console.log('foo');
-      angular.element('.title').popover({
-        html: true,
-        placement: 'bottom',
-        content: function() {
-          return angular.element('.popover').html();
-        },
-      })
+    $scope.currentClause = $scope.clause;
+
+
+
+    $scope.openArguments = function(id) {
+      var titleDiv = !!id ? angular.element('[clauseid="' + id + '"]') : angular.element('.title');
+      if (titleDiv.attr('data-original-title') !== '') {
+        titleDiv.popover({
+          html: true,
+          trigger: 'manual',
+          placement: 'bottom',
+          content: $compile(angular.element('.popover').html())($scope)
+        });
+
+      }
+
+      titleDiv.popover('toggle');
     };
 
     $scope.filteredScreenList = [];
